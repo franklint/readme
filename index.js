@@ -6,8 +6,8 @@ const path = require('path');
 // TODO: Create an array of questions for user input
 
 
-async function init() {
-    const response = await inquirer.prompt([
+function init() {
+   inquirer.prompt([
         {
             type: 'input',
             name: 'github',
@@ -89,14 +89,13 @@ async function init() {
         {
             type: 'checkbox', 
             name: 'license', 
-            message: 'Please select a license, and please pick WTFPL', 
+            message: 'Please select a license, and please pick WTFPL (select with space bar)', 
             choices: ['WTFPL', 'The Unlicense', 'Perl']
         }, 
-        {
-            
-        }
     ])
-    return fs.writeFileSync(path.join(process.cwd(), "README.md"), generate(response)); 
+    .then((response)=>{
+        return fs.writeFileSync(path.join(process.cwd(), "README.md"), generate(response)); 
+    });
 }; 
 
 // TODO: Create a function to write README file
